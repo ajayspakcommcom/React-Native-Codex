@@ -92,6 +92,29 @@
 - typed sign-up form validation with inline error messages
 - Ran `npm run lint` and fixed the navigation JSX issue so the section is clean.
 
+## 10. Implemented Beginner Tools
+- Created `src/beginner/tools`.
+- Split the section into:
+- `metro`
+- `debugging`
+- `git-basics`
+- Added a section summary file:
+- `src/beginner/tools/README.md`
+- Added topic `README.md` files inside each subfolder.
+- Added practical workflow documents for each tools topic:
+- `src/beginner/tools/metro/01_MetroWorkflow.md`
+- `src/beginner/tools/debugging/01_DebuggingWorkflow.md`
+- `src/beginner/tools/git-basics/01_GitWorkflow.md`
+- Documented:
+- how Metro works in this bare React Native project
+- how `npm start` fits into iOS and Android run flow
+- cache reset and Metro troubleshooting
+- how to debug navigation, API requests, forms, and runtime errors
+- how to use logs, the Dev Menu, and dev tools
+- the beginner Git workflow used in this repository
+- `git status`, `git add`, `git commit`, `git push`, and branch basics
+- common beginner Git mistakes to avoid
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
