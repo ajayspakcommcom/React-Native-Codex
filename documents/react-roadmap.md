@@ -25,7 +25,7 @@
 ### State & Architecture
 - Hooks in depth
 - Context API
-- Redux Toolkit / Zustand
+- Redux Toolkit / RTK Query
 - Clean component structure
 
 ### Native Features
