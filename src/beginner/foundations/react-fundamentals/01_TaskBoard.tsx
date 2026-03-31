@@ -8,7 +8,14 @@ import {
   View,
 } from 'react-native'
 
-interface Task {
+import {
+  FoundationCard,
+  PrimaryButton,
+  SectionHeader,
+} from '../shared/ui'
+import { foundationTheme } from '../shared/theme'
+
+export interface Task {
   id: string
   title: string
   done: boolean
@@ -19,9 +26,20 @@ interface TaskRowProps {
   onToggle: (taskId: string) => void
 }
 
+let nextTaskId = 4
+
+const createTask = (title: string): Task => ({
+  id: `task-${nextTaskId++}`,
+  title,
+  done: false,
+})
+
 function TaskRow({ task, onToggle }: TaskRowProps): React.JSX.Element {
   return (
     <Pressable
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked: task.done }}
+      accessibilityLabel={`Task ${task.title}`}
       style={[styles.taskRow, task.done && styles.taskRowDone]}
       onPress={() => onToggle(task.id)}>
       <View style={[styles.checkbox, task.done && styles.checkboxActive]} />
@@ -48,18 +66,13 @@ export default function TaskBoard(): React.JSX.Element {
   const completedCount = tasks.filter(task => task.done).length
 
   const addTask = (): void => {
-    if (!newTask.trim()) {
+    const trimmedTask = newTask.trim()
+
+    if (!trimmedTask) {
       return
     }
 
-    setTasks(currentTasks => [
-      {
-        id: `task-${currentTasks.length + 1}`,
-        title: newTask.trim(),
-        done: false,
-      },
-      ...currentTasks,
-    ])
+    setTasks(currentTasks => [createTask(trimmedTask), ...currentTasks])
     setNewTask('')
   }
 
@@ -73,30 +86,37 @@ export default function TaskBoard(): React.JSX.Element {
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
-      <Text style={styles.heading}>Team Task Board</Text>
-      <Text style={styles.caption}>
-        A simple example of JSX, components, props, state, list rendering, and
-        conditional UI.
-      </Text>
+      <SectionHeader
+        title="Team Task Board"
+        subtitle="Refactored toward a production-style component boundary with typed task models, reusable UI primitives, accessibility roles, and safer local state updates."
+      />
 
-      <View style={styles.summaryCard}>
+      <FoundationCard style={styles.summaryCard}>
         <Text style={styles.summaryNumber}>
           {completedCount}/{tasks.length}
         </Text>
         <Text style={styles.summaryLabel}>tasks completed</Text>
-      </View>
+      </FoundationCard>
 
       <View style={styles.inputRow}>
         <TextInput
+          accessibilityLabel="New task title"
           value={newTask}
           onChangeText={setNewTask}
+          onSubmitEditing={addTask}
           placeholder="Add a new task"
           placeholderTextColor="#94A3B8"
+          returnKeyType="done"
           style={styles.input}
         />
-        <Pressable style={styles.addButton} onPress={addTask}>
-          <Text style={styles.addButtonText}>Add</Text>
-        </Pressable>
+        <View style={styles.addButtonWrap}>
+          <PrimaryButton
+            label="Add"
+            onPress={addTask}
+            disabled={!newTask.trim()}
+            accessibilityLabel="Add task to board"
+          />
+        </View>
       </View>
 
       <View style={styles.list}>
@@ -121,56 +141,40 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#0F172A',
-  },
-  caption: {
-    marginTop: 8,
-    fontSize: 14,
-    lineHeight: 21,
-    color: '#475569',
+    color: foundationTheme.colors.textPrimary,
   },
   summaryCard: {
     marginTop: 20,
-    backgroundColor: '#0F172A',
-    borderRadius: 18,
-    padding: 20,
+    backgroundColor: foundationTheme.colors.dark,
   },
   summaryNumber: {
     fontSize: 32,
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: foundationTheme.colors.white,
   },
   summaryLabel: {
     marginTop: 4,
     fontSize: 14,
-    color: '#CBD5E1',
+    color: foundationTheme.colors.border,
   },
   inputRow: {
     flexDirection: 'row',
     marginTop: 20,
+    alignItems: 'flex-start',
   },
   input: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: foundationTheme.colors.surface,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: '#CBD5E1',
+    borderColor: foundationTheme.colors.border,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
     marginRight: 10,
   },
-  addButton: {
-    backgroundColor: '#2563EB',
-    borderRadius: 14,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 18,
-  },
-  addButtonText: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '700',
+  addButtonWrap: {
+    width: 88,
   },
   list: {
     marginTop: 20,
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
   taskRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: foundationTheme.colors.surface,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -204,7 +208,7 @@ const styles = StyleSheet.create({
   taskTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
   },
   taskTitleDone: {
     textDecorationLine: 'line-through',
@@ -213,11 +217,11 @@ const styles = StyleSheet.create({
   taskSubtitle: {
     marginTop: 4,
     fontSize: 13,
-    color: '#64748B',
+    color: foundationTheme.colors.textMuted,
   },
   emptyText: {
     fontSize: 14,
-    color: '#64748B',
+    color: foundationTheme.colors.textMuted,
     textAlign: 'center',
     marginTop: 20,
   },

@@ -1,14 +1,22 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-interface Customer {
+import {
+  FoundationCard,
+  Pill,
+  PrimaryButton,
+  SectionHeader,
+} from '../shared/ui'
+import { foundationTheme } from '../shared/theme'
+
+export interface Customer {
   id: string
   name: string
   email: string
   isPremium: boolean
 }
 
-interface OrderItem {
+export interface OrderItem {
   id: string
   title: string
   quantity: number
@@ -17,54 +25,95 @@ interface OrderItem {
 
 interface OrderSummaryProps {
   customer: Customer
-  items: OrderItem[]
+  items: ReadonlyArray<OrderItem>
   couponCode?: string
 }
 
 const formatCurrency = (amount: number): string => `$${amount.toFixed(2)}`
+
+const getOrderPricing = (
+  customer: Customer,
+  items: ReadonlyArray<OrderItem>,
+  couponCode?: string,
+) => {
+  const itemCount = items.reduce((total, item) => total + item.quantity, 0)
+  const subtotal = items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  )
+  const premiumDiscount = customer.isPremium ? subtotal * 0.1 : 0
+  const couponDiscount = couponCode ? 15 : 0
+  const taxableAmount = Math.max(subtotal - premiumDiscount - couponDiscount, 0)
+  const tax = taxableAmount * 0.08
+  const total = taxableAmount + tax
+
+  return {
+    itemCount,
+    subtotal,
+    premiumDiscount,
+    couponDiscount,
+    tax,
+    total,
+  }
+}
+
+interface SummaryRowProps {
+  label: string
+  value: string
+  emphasize?: boolean
+}
+
+function SummaryRow({
+  label,
+  value,
+  emphasize = false,
+}: SummaryRowProps): React.JSX.Element {
+  return (
+    <View style={[styles.summaryRow, emphasize && styles.totalRow]}>
+      <Text style={[styles.summaryLabel, emphasize && styles.totalLabel]}>
+        {label}
+      </Text>
+      <Text style={[styles.summaryValue, emphasize && styles.totalValue]}>
+        {value}
+      </Text>
+    </View>
+  )
+}
 
 const OrderSummary = ({
   customer,
   items,
   couponCode,
 }: OrderSummaryProps): React.JSX.Element => {
-  const itemCount = items.reduce((total, item) => total + item.quantity, 0)
-  const subtotal = items.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0,
-  )
-  const discount = customer.isPremium ? subtotal * 0.1 : 0
-  const couponDiscount = couponCode ? 15 : 0
-  const tax = (subtotal - discount - couponDiscount) * 0.08
-  const total = subtotal - discount - couponDiscount + tax
+  const pricing = getOrderPricing(customer, items, couponCode)
 
   return (
     <View style={styles.screen}>
-      <View style={styles.card}>
-        <Text style={styles.heading}>Order Summary</Text>
+      <FoundationCard>
+        <SectionHeader
+          title="Order Summary"
+          subtitle="An industry-style example with typed domain models, pure pricing logic, reusable UI primitives, and clear separation between data and presentation."
+        />
         <Text style={styles.customerName}>{customer.name}</Text>
         <Text style={styles.customerEmail}>{customer.email}</Text>
 
         <View style={styles.badgeRow}>
-          <View
-            style={[
-              styles.badge,
-              customer.isPremium ? styles.premiumBadge : styles.regularBadge,
-            ]}>
-            <Text style={styles.badgeText}>
-              {customer.isPremium ? 'Premium customer' : 'Regular customer'}
-            </Text>
-          </View>
+          <Pill
+            label={customer.isPremium ? 'Premium customer' : 'Regular customer'}
+            tone={customer.isPremium ? 'success' : 'neutral'}
+          />
           {couponCode ? (
-            <View style={styles.couponBadge}>
-              <Text style={styles.badgeText}>Coupon: {couponCode}</Text>
-            </View>
+            <Pill label={`Coupon: ${couponCode}`} tone="info" />
           ) : null}
         </View>
 
         <View style={styles.section}>
           {items.map(({ id, title, price, quantity }) => (
-            <View key={id} style={styles.itemRow}>
+            <View
+              key={id}
+              style={styles.itemRow}
+              accessible
+              accessibilityLabel={`${title}, quantity ${quantity}, line total ${formatCurrency(price * quantity)}`}>
               <View>
                 <Text style={styles.itemTitle}>{title}</Text>
                 <Text style={styles.itemMeta}>
@@ -79,38 +128,32 @@ const OrderSummary = ({
         </View>
 
         <View style={styles.summaryBox}>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Items</Text>
-            <Text style={styles.summaryValue}>{itemCount}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Subtotal</Text>
-            <Text style={styles.summaryValue}>{formatCurrency(subtotal)}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Premium discount</Text>
-            <Text style={styles.summaryValue}>-{formatCurrency(discount)}</Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Coupon discount</Text>
-            <Text style={styles.summaryValue}>
-              -{formatCurrency(couponDiscount)}
-            </Text>
-          </View>
-          <View style={styles.summaryRow}>
-            <Text style={styles.summaryLabel}>Tax</Text>
-            <Text style={styles.summaryValue}>{formatCurrency(tax)}</Text>
-          </View>
-          <View style={styles.totalRow}>
-            <Text style={styles.totalLabel}>Total</Text>
-            <Text style={styles.totalValue}>{formatCurrency(total)}</Text>
-          </View>
+          <SummaryRow label="Items" value={`${pricing.itemCount}`} />
+          <SummaryRow
+            label="Subtotal"
+            value={formatCurrency(pricing.subtotal)}
+          />
+          <SummaryRow
+            label="Premium discount"
+            value={`-${formatCurrency(pricing.premiumDiscount)}`}
+          />
+          <SummaryRow
+            label="Coupon discount"
+            value={`-${formatCurrency(pricing.couponDiscount)}`}
+          />
+          <SummaryRow label="Tax" value={formatCurrency(pricing.tax)} />
+          <SummaryRow
+            label="Total"
+            value={formatCurrency(pricing.total)}
+            emphasize
+          />
         </View>
 
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>Place order</Text>
-        </Pressable>
-      </View>
+        <PrimaryButton
+          label="Place order"
+          accessibilityLabel="Place order for this cart"
+        />
+      </FoundationCard>
     </View>
   )
 }
@@ -135,61 +178,21 @@ const styles = StyleSheet.create({
     padding: 20,
     justifyContent: 'center',
   },
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: '#0F172A',
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 4,
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#0F172A',
-  },
   customerName: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '600',
-    color: '#111827',
+    fontWeight: '700',
+    color: foundationTheme.colors.textPrimary,
   },
   customerEmail: {
     marginTop: 4,
     fontSize: 14,
-    color: '#64748B',
+    color: foundationTheme.colors.textMuted,
   },
   badgeRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 16,
-  },
-  badge: {
-    borderRadius: 999,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  premiumBadge: {
-    backgroundColor: '#D1FAE5',
-  },
-  regularBadge: {
-    backgroundColor: '#E5E7EB',
-  },
-  couponBadge: {
-    borderRadius: 999,
-    backgroundColor: '#DBEAFE',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginBottom: 8,
-  },
-  badgeText: {
-    color: '#0F172A',
-    fontSize: 12,
-    fontWeight: '600',
   },
   section: {
     marginTop: 20,
@@ -205,22 +208,22 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#111827',
+    color: foundationTheme.colors.textPrimary,
   },
   itemMeta: {
     marginTop: 4,
     fontSize: 13,
-    color: '#64748B',
+    color: foundationTheme.colors.textMuted,
   },
   itemPrice: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
   },
   summaryBox: {
     marginTop: 20,
     borderRadius: 16,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: foundationTheme.colors.surfaceMuted,
     padding: 16,
   },
   summaryRow: {
@@ -230,42 +233,28 @@ const styles = StyleSheet.create({
   },
   summaryLabel: {
     fontSize: 14,
-    color: '#475569',
+    color: foundationTheme.colors.textSecondary,
   },
   summaryValue: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
   },
   totalRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     paddingTop: 12,
     marginTop: 4,
     borderTopWidth: 1,
-    borderTopColor: '#CBD5E1',
+    borderTopColor: foundationTheme.colors.border,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
   },
   totalValue: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#0B8F55',
-  },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#1D4ED8',
-    borderRadius: 14,
-    paddingVertical: 14,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '700',
+    color: foundationTheme.colors.success,
   },
 })
 

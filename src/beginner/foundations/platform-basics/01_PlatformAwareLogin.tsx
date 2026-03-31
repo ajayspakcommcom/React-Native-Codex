@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   StatusBar,
   StyleSheet,
   Text,
@@ -11,11 +10,19 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import {
+  FoundationCard,
+  PrimaryButton,
+  SectionHeader,
+} from '../shared/ui'
+import { foundationTheme } from '../shared/theme'
+
 export default function PlatformAwareLogin(): React.JSX.Element {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const isIOS = Platform.OS === 'ios'
+  const isFormValid = email.trim().length > 0 && password.trim().length >= 8
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
@@ -31,32 +38,39 @@ export default function PlatformAwareLogin(): React.JSX.Element {
           <Text style={styles.caption}>
             {isIOS ? 'iOS login experience' : 'Android login experience'}
           </Text>
-          <Text style={styles.heading}>Welcome back</Text>
-          <Text style={styles.subheading}>
-            This screen shows safe area handling, status bar differences,
-            keyboard behavior, and platform-specific styling.
-          </Text>
+          <SectionHeader
+            title="Welcome back"
+            subtitle="This version adds stronger form behavior, clearer platform handling, and reusable shared UI so the example is closer to how production screens are structured."
+          />
         </View>
 
-        <View style={[styles.card, isIOS ? styles.iosCard : styles.androidCard]}>
+        <FoundationCard
+          style={[styles.card, isIOS ? styles.iosCard : styles.androidCard]}>
           <Text style={styles.label}>Email address</Text>
           <TextInput
+            accessibilityLabel="Email address"
             value={email}
             onChangeText={setEmail}
             placeholder="you@example.com"
             placeholderTextColor="#94A3B8"
             keyboardType="email-address"
             autoCapitalize="none"
+            autoCorrect={false}
+            textContentType="emailAddress"
+            returnKeyType="next"
             style={styles.input}
           />
 
           <Text style={styles.label}>Password</Text>
           <TextInput
+            accessibilityLabel="Password"
             value={password}
             onChangeText={setPassword}
             placeholder="Enter password"
             placeholderTextColor="#94A3B8"
             secureTextEntry
+            textContentType="password"
+            returnKeyType="done"
             style={styles.input}
           />
 
@@ -66,10 +80,12 @@ export default function PlatformAwareLogin(): React.JSX.Element {
             </Text>
           </View>
 
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Sign in</Text>
-          </Pressable>
-        </View>
+          <PrimaryButton
+            label="Sign in"
+            disabled={!isFormValid}
+            accessibilityLabel="Sign in to your account"
+          />
+        </FoundationCard>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
@@ -79,16 +95,16 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: Platform.select({
-      ios: '#F8FAFC',
-      android: '#0F172A',
-      default: '#F8FAFC',
+      ios: foundationTheme.colors.background,
+      android: foundationTheme.colors.dark,
+      default: foundationTheme.colors.background,
     }),
   },
   screen: {
     flex: 1,
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: foundationTheme.colors.background,
   },
   header: {
     marginBottom: 20,
@@ -97,30 +113,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
     textTransform: 'uppercase',
-    color: '#2563EB',
-  },
-  heading: {
-    marginTop: 8,
-    fontSize: 30,
-    fontWeight: '800',
-    color: '#0F172A',
-  },
-  subheading: {
-    marginTop: 10,
-    fontSize: 14,
-    lineHeight: 21,
-    color: '#475569',
+    color: foundationTheme.colors.primary,
   },
   card: {
-    borderRadius: 22,
-    backgroundColor: '#FFFFFF',
-    padding: 20,
+    marginTop: 8,
   },
   iosCard: {
-    shadowColor: '#0F172A',
-    shadowOpacity: 0.08,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 10 },
+    ...foundationTheme.shadows.card,
   },
   androidCard: {
     elevation: 6,
@@ -133,13 +132,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#CBD5E1',
+    borderColor: foundationTheme.colors.border,
     borderRadius: 14,
     paddingHorizontal: 14,
     paddingVertical: 12,
-    color: '#0F172A',
+    color: foundationTheme.colors.textPrimary,
     marginBottom: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: foundationTheme.colors.surface,
   },
   platformNote: {
     backgroundColor: '#EFF6FF',
@@ -148,20 +147,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   platformNoteText: {
-    color: '#1D4ED8',
+    color: foundationTheme.colors.primaryDark,
     fontSize: 13,
     fontWeight: '600',
-  },
-  button: {
-    marginTop: 20,
-    backgroundColor: '#0F172A',
-    borderRadius: 14,
-    alignItems: 'center',
-    paddingVertical: 14,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '700',
   },
 })
