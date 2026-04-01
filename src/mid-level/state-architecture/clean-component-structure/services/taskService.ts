@@ -32,6 +32,10 @@ const deliveryTasks: ReadonlyArray<DeliveryTask> = [
 ]
 
 export async function getDeliveryTasks(): Promise<DeliveryTask[]> {
-  await new Promise(resolve => setTimeout(resolve, 350))
+  await new Promise<void>(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, 350)
+  })
   return [...deliveryTasks]
 }

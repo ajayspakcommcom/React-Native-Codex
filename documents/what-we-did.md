@@ -115,6 +115,147 @@
 - `git status`, `git add`, `git commit`, `git push`, and branch basics
 - common beginner Git mistakes to avoid
 
+## 11. Implemented Mid-Level State & Architecture
+- Created `src/mid-level/state-architecture`.
+- Implemented the full `State & Architecture` section one topic at a time.
+- Updated the roadmap direction from:
+- `Redux Toolkit / Zustand`
+- to:
+- `Redux Toolkit / RTK Query`
+
+### Hooks in depth
+- Created:
+- `src/mid-level/state-architecture/hooks-in-depth/README.md`
+- `src/mid-level/state-architecture/hooks-in-depth/useDebouncedValue.ts`
+- `src/mid-level/state-architecture/hooks-in-depth/01_FeedbackInsightsBoard.tsx`
+- Implemented:
+- `useReducer`
+- `useEffect`
+- `useRef`
+- cleanup logic with `clearTimeout`
+- a reusable custom hook for debounced values
+
+### Context API
+- Created:
+- `src/mid-level/state-architecture/context-api/README.md`
+- `src/mid-level/state-architecture/context-api/WorkspaceSessionContext.tsx`
+- `src/mid-level/state-architecture/context-api/01_WorkspaceSessionBoard.tsx`
+- Implemented:
+- typed React context
+- provider and consumer pattern
+- guarded custom hook
+- shared session state without prop drilling
+
+### Redux Toolkit / RTK Query
+- Installed:
+- `@reduxjs/toolkit`
+- `react-redux`
+- Created:
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/README.md`
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/feedbackFiltersSlice.ts`
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/feedbackApi.ts`
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/store.ts`
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/hooks.ts`
+- `src/mid-level/state-architecture/redux-toolkit-rtk-query/01_FeedbackOperationsDashboard.tsx`
+- Implemented:
+- Redux Toolkit slice for client-side UI state
+- RTK Query service for server state
+- typed store and typed hooks
+- loading, error, success, and refetch flow
+
+### Clean component structure
+- Created:
+- `src/mid-level/state-architecture/clean-component-structure/README.md`
+- `src/mid-level/state-architecture/clean-component-structure/01_DeliveryWorkspace.tsx`
+- `src/mid-level/state-architecture/clean-component-structure/components/DeliveryTaskCard.tsx`
+- `src/mid-level/state-architecture/clean-component-structure/hooks/useDeliveryTasks.ts`
+- `src/mid-level/state-architecture/clean-component-structure/services/taskService.ts`
+- `src/mid-level/state-architecture/clean-component-structure/types/task.ts`
+- `src/mid-level/state-architecture/clean-component-structure/utils/taskFormatters.ts`
+- Implemented:
+- feature-level file splitting into components, hooks, services, types, and utils
+- smaller screen entry file
+- clearer separation of UI, logic, data, and formatting responsibilities
+
+### Validation
+- Ran `npm run lint` after each topic implementation.
+- Confirmed the full `Mid-Level -> State & Architecture` section is lint clean.
+
+## 12. Implemented Mid-Level Native Features
+- Created `src/mid-level/native-features`.
+- Split the section into:
+- `permissions`
+- `camera-media-location`
+- `mmkv`
+- Added section and topic `README.md` files to track the work.
+
+### Permissions
+- Installed:
+- `react-native-permissions`
+- Updated native configuration:
+- `ios/Podfile`
+- `ios/ReactNativeCodex/Info.plist`
+- `android/app/src/main/AndroidManifest.xml`
+- Created:
+- `src/mid-level/native-features/permissions/README.md`
+- `src/mid-level/native-features/permissions/types.ts`
+- `src/mid-level/native-features/permissions/permissionService.ts`
+- `src/mid-level/native-features/permissions/usePermission.ts`
+- `src/mid-level/native-features/permissions/01_LocationPermissionCenter.tsx`
+- Implemented:
+- reusable permission service and custom hook
+- location permission status check and request flow
+- denied, blocked, granted state handling
+- app settings recovery flow
+- automatic permission refresh after returning from settings
+
+### Camera, Media, Location
+- Installed:
+- `react-native-image-picker`
+- `@react-native-community/geolocation`
+- Extended native configuration:
+- `ios/Podfile`
+- `ios/ReactNativeCodex/Info.plist`
+- `android/app/src/main/AndroidManifest.xml`
+- Created:
+- `src/mid-level/native-features/camera-media-location/README.md`
+- `src/mid-level/native-features/camera-media-location/types.ts`
+- `src/mid-level/native-features/camera-media-location/deviceMediaService.ts`
+- `src/mid-level/native-features/camera-media-location/locationService.ts`
+- `src/mid-level/native-features/camera-media-location/01_CameraCaptureCenter.tsx`
+- `src/mid-level/native-features/camera-media-location/02_MediaLibraryPicker.tsx`
+- `src/mid-level/native-features/camera-media-location/03_CurrentLocationPanel.tsx`
+- Implemented:
+- camera capture flow with permission gating
+- media library image picker flow
+- current location retrieval
+- shared service wrappers for device media and location APIs
+
+### MMKV
+- Installed:
+- `react-native-mmkv`
+- `react-native-nitro-modules`
+- Created:
+- `src/mid-level/native-features/mmkv/README.md`
+- `src/mid-level/native-features/mmkv/storage.ts`
+- `src/mid-level/native-features/mmkv/storageContracts.ts`
+- `src/mid-level/native-features/mmkv/storageCodecs.ts`
+- `src/mid-level/native-features/mmkv/preferencesStorage.ts`
+- `src/mid-level/native-features/mmkv/01_PersistedWorkspacePreferences.tsx`
+- Implemented:
+- domain-based MMKV storage registry
+- schema versioning and migration tracking
+- repository-style preferences storage helpers
+- safe object serialization utilities
+- persisted workspace preferences example screen
+- storage health and migration visibility in the demo UI
+
+### Validation
+- Ran `pod install` after native package changes.
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Fixed a TypeScript issue in the navigation example and a promise typing issue in the clean component structure service during final validation.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)

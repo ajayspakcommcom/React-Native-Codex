@@ -169,7 +169,7 @@ function DetailsScreen({
 
 export default function AppNavigatorExample(): React.JSX.Element {
   return (
-    <NavigationContainer independent>
+    <NavigationContainer>
       <RootStack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: '#FFFFFF' },
