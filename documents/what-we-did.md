@@ -256,6 +256,68 @@
 - Ran `npx tsc --noEmit` successfully.
 - Fixed a TypeScript issue in the navigation example and a promise typing issue in the clean component structure service during final validation.
 
+## 13. Implemented Mid-Level Performance
+- Created `src/mid-level/performance`.
+- Split the section into:
+- `memoization`
+- `flatlist-optimization`
+- `avoid-unnecessary-re-renders`
+- Added a profiling support folder:
+- `profiling-workflow`
+- Added a shared performance helper:
+- `src/mid-level/performance/shared/useProfilerMetrics.ts`
+
+### Memoization
+- Created:
+- `src/mid-level/performance/memoization/README.md`
+- `src/mid-level/performance/memoization/01_SalesInsightsBoard.tsx`
+- Implemented:
+- `React.memo`
+- `useMemo`
+- `useCallback`
+- stable props and derived values
+- memoized summary cards and row components
+
+### FlatList optimization
+- Created:
+- `src/mid-level/performance/flatlist-optimization/README.md`
+- `src/mid-level/performance/flatlist-optimization/01_OrderOperationsQueue.tsx`
+- Implemented:
+- stable `renderItem`
+- stable `keyExtractor`
+- `getItemLayout`
+- row memoization for large lists
+- `FlatList` batch and window tuning
+- isolating unrelated note editor state from list churn
+- profiler-based measurement of list rendering
+
+### Avoid unnecessary re-renders
+- Created:
+- `src/mid-level/performance/avoid-unnecessary-re-renders/README.md`
+- `src/mid-level/performance/avoid-unnecessary-re-renders/01_WorkspaceSupportConsole.tsx`
+- Implemented:
+- state colocation
+- screen splitting and render isolation
+- `useDeferredValue`
+- `startTransition`
+- memoized panels with narrow props
+- keeping fast-changing draft state out of the parent screen root
+
+### Profiling workflow
+- Created:
+- `src/mid-level/performance/profiling-workflow/README.md`
+- `src/mid-level/performance/profiling-workflow/01_PerformanceProfilingWorkflow.md`
+- Documented:
+- how to profile the performance examples with React DevTools
+- how to use Flipper as supporting tooling
+- what to measure before and after optimization changes
+- how to validate actual duration and base duration instead of guessing
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Fixed React `Profiler` callback typing during validation.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
