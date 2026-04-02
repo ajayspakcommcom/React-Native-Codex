@@ -739,6 +739,24 @@
 - Tracked remaining scheduler/runtime validation in:
 - `src/senior/native-integration/background-foreground-tasks/PENDING.md`
 
+### Push notifications
+- Created:
+- `src/senior/native-integration/push-notifications/README.md`
+- `src/senior/native-integration/push-notifications/PENDING.md`
+- `src/senior/native-integration/push-notifications/contracts.ts`
+- `src/senior/native-integration/push-notifications/notificationCoordinator.ts`
+- `src/senior/native-integration/push-notifications/notificationRouteResolver.ts`
+- `src/senior/native-integration/push-notifications/01_PushNotificationControlCenter.tsx`
+- `src/senior/native-integration/push-notifications/02_NotificationInboxConsole.tsx`
+- Implemented:
+- permission and token lifecycle modeling
+- centralized notification coordinator
+- payload route resolution
+- foreground, background, and cold-start delivery modeling
+- control center and inbox console examples
+- Tracked APNs/FCM and device rollout work in:
+- `src/senior/native-integration/push-notifications/PENDING.md`
+
 ### Validation
 - Ran `npm run lint` successfully.
 - Ran `npx tsc --noEmit` successfully.

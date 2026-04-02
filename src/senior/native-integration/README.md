@@ -7,17 +7,20 @@ This folder contains the `Native Integration` part of the Senior roadmap.
 - Started this section with `native-modules`.
 - Added the second topic: `turbomodules-fabric`.
 - Added the third topic: `background-foreground-tasks`.
+- Added the fourth topic: `push-notifications`.
 - Added this section summary file as the running log for this folder.
 
 ## Current Topics
 - Native Modules
 - TurboModules and Fabric
 - Background tasks
+- Push notifications
 
 ## Current Structure
 - `native-modules`
 - `turbomodules-fabric`
 - `background-foreground-tasks`
+- `push-notifications`
 
 ## Notes
 - Senior native integration work in this section should use typed JS contracts, explicit native boundaries, and realistic platform implementation patterns instead of trivial native demos.
