@@ -5,13 +5,19 @@ This folder contains the `Performance (Deep)` part of the Senior roadmap.
 ## What We Did
 - Created the `performance-deep` folder inside `src/senior`.
 - Started this section with `reanimated-gesture-handler`.
+- Added the second topic: `interaction-manager`.
+- Added the third topic: `memory-bridge-optimization`.
 - Added this section summary file as the running log for this folder.
 
 ## Current Topics
 - Reanimated 2+ and Gesture Handler
+- Interaction Manager
+- Memory and bridge optimization
 
 ## Current Structure
 - `reanimated-gesture-handler`
+- `interaction-manager`
+- `memory-bridge-optimization`
 
 ## Notes
 - Senior performance work in this section should focus on deeper runtime behavior, smoother interaction systems, and techniques that matter under production load.

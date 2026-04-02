@@ -9,10 +9,13 @@ This is the first topic inside `Senior -> Performance (Deep)`.
 - practical architecture for high-frequency interactive surfaces
 
 ## What We Added
-- Added the topic folder and this summary file.
+- Added a senior-level interaction surface example:
+  `01_WorkspaceCommandDeck.tsx`
 
 ## Current Files
 - `README.md`
+- `01_WorkspaceCommandDeck.tsx`
 
 ## Implementation Notes
-- The next step is to add a senior-level example that combines Reanimated shared values, gesture handling, and a performance-oriented interaction surface.
+- The example uses a gesture-driven command deck with snap points, UI-thread animation, and minimal JS synchronization.
+- It demonstrates the kind of interaction architecture used for high-frequency production surfaces where dragging and snapping should stay smooth under load.
