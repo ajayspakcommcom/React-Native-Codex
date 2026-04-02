@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "build:android:apk:development": "cd android && ./gradlew assembleDevelopmentRelease",
+    "build:android:apk:staging": "cd android && ./gradlew assembleStagingRelease",
+    "build:android:apk:production": "cd android && ./gradlew assembleProductionRelease",
+    "build:android:aab:production": "cd android && ./gradlew bundleProductionRelease",
     "e2e:maestro:smoke": "maestro test .maestro/workspace-smoke.yaml",
     "e2e:maestro:toggle": "maestro test .maestro/workspace-alerts-toggle.yaml",
     "ios": "react-native run-ios",

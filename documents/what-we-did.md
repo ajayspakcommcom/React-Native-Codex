@@ -451,6 +451,76 @@
 - Ran `npm test -- --runInBand` successfully.
 - Confirmed Maestro CLI is not installed on this machine, so the Maestro flows were prepared but not executed locally.
 
+## 16. Implemented Mid-Level Builds
+- Created `src/mid-level/builds`.
+- Split the section into:
+- `environment-configs`
+- `android-apk-aab`
+- `ios-ipa`
+- Added a section-level pending tracker:
+- `src/mid-level/builds/PENDING.md`
+
+### Environment configs
+- Created:
+- `src/mid-level/builds/environment-configs/README.md`
+- `src/mid-level/builds/environment-configs/env.contract.ts`
+- `src/mid-level/builds/environment-configs/env.dev.ts`
+- `src/mid-level/builds/environment-configs/env.staging.ts`
+- `src/mid-level/builds/environment-configs/env.production.ts`
+- `src/mid-level/builds/environment-configs/appEnv.ts`
+- `src/mid-level/builds/environment-configs/01_EnvironmentControlCenter.tsx`
+- `src/mid-level/builds/environment-configs/02_BuildEnvironmentWorkflow.md`
+- Implemented:
+- typed environment contract
+- development, staging, and production config separation
+- centralized environment resolution
+- environment-aware workflow documentation for both platforms
+
+### Android APK/AAB
+- Updated:
+- `android/app/build.gradle`
+- `package.json`
+- Created:
+- `src/mid-level/builds/android-apk-aab/README.md`
+- `src/mid-level/builds/android-apk-aab/01_AndroidArtifactWorkflow.md`
+- `src/mid-level/builds/android-apk-aab/PENDING.md`
+- Implemented:
+- Android product flavors for development, staging, and production
+- flavor-based app naming and environment values
+- enterprise-style APK and AAB npm scripts
+- release signing property structure with local fallback
+- workflow documentation for internal APK and Play Store AAB usage
+- Explicitly tracked pending Android validation for:
+- release task execution
+- real signing verification
+- artifact output verification
+- CI/distribution readiness
+
+### iOS IPA
+- Created:
+- `src/mid-level/builds/ios-ipa/README.md`
+- `src/mid-level/builds/ios-ipa/01_IosArtifactWorkflow.md`
+- `src/mid-level/builds/ios-ipa/PENDING.md`
+- Implemented:
+- enterprise-style archive and export workflow documentation
+- current repo reality around the shared `ReactNativeCodex` scheme
+- `xcodebuild archive` and `xcodebuild -exportArchive` reference flow
+- documented enterprise expectations for schemes, xcconfig, signing, and export options
+- Explicitly tracked pending iOS validation for:
+- dedicated schemes
+- xcconfig setup
+- real signing and provisioning
+- archive/export execution
+- CI/TestFlight readiness
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Tracked the remaining native release validation work in:
+- `src/mid-level/builds/PENDING.md`
+- `src/mid-level/builds/android-apk-aab/PENDING.md`
+- `src/mid-level/builds/ios-ipa/PENDING.md`
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
