@@ -597,11 +597,40 @@
 - Tracked larger-scale DI follow-up work in:
 - `src/senior/advanced-architecture/dependency-injection-patterns/PENDING.md`
 
+### Monorepos with Nx
+- Created:
+- `src/senior/advanced-architecture/monorepos-nx/README.md`
+- `src/senior/advanced-architecture/monorepos-nx/PENDING.md`
+- `src/senior/advanced-architecture/monorepos-nx/01_NxWorkspaceBlueprint.md`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/package.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/nx.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/tsconfig.base.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/eslint.config.mjs`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/apps/mobile/project.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/apps/ops-console/project.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/libs/shared/ui/project.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/libs/shared/types/project.json`
+- `src/senior/advanced-architecture/monorepos-nx/workspace-blueprint/libs/mobile/feature-release-control/project.json`
+- Implemented:
+- enterprise Nx workspace blueprint
+- multi-app and multi-library reference layout
+- tagged module boundary enforcement example
+- affected-task oriented scripts and Nx target defaults
+- React Native app placement inside a governed monorepo model
+- Tracked live migration follow-up work in:
+- `src/senior/advanced-architecture/monorepos-nx/PENDING.md`
+
 ### Validation
 - Ran `npm run lint` successfully.
 - Ran `npx tsc --noEmit` successfully.
-- `src/mid-level/builds/android-apk-aab/PENDING.md`
-- `src/mid-level/builds/ios-ipa/PENDING.md`
+
+## 18. Started Senior Performance (Deep)
+- Created `src/senior/performance-deep`.
+- Started the section with:
+- `reanimated-gesture-handler`
+- Added section and topic tracking files:
+- `src/senior/performance-deep/README.md`
+- `src/senior/performance-deep/reanimated-gesture-handler/README.md`
 
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)

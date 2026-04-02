@@ -1,0 +1,15 @@
+{
+  "name": "mobile-feature-release-control",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/mobile/feature-release-control/src",
+  "projectType": "library",
+  "tags": ["scope:mobile", "type:feature"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest"
+    }
+  }
+}

@@ -7,17 +7,20 @@ This folder contains the `Advanced Architecture` part of the Senior roadmap.
 - Started this section with `modular-architecture`.
 - Added the second topic: `feature-based-foldering`.
 - Added the third topic: `dependency-injection-patterns`.
+- Added the fourth topic: `monorepos-nx`.
 - Added this section summary file as the running log for this folder.
 
 ## Current Topics
 - Modular architecture
 - Feature-based foldering
 - Dependency injection patterns
+- Monorepos with Nx
 
 ## Current Structure
 - `modular-architecture`
 - `feature-based-foldering`
 - `dependency-injection-patterns`
+- `monorepos-nx`
 
 ## Notes
 - Senior architecture work in this section should emphasize module boundaries, composition roots, dependency contracts, and scaling patterns instead of single-screen demos only.

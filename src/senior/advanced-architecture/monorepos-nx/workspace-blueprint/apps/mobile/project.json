@@ -1,0 +1,27 @@
+{
+  "name": "mobile",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mobile/src",
+  "projectType": "application",
+  "tags": ["scope:mobile-app", "platform:native"],
+  "targets": {
+    "start": {
+      "executor": "@nx/react-native:start",
+      "options": {
+        "port": 8081
+      }
+    },
+    "ios": {
+      "executor": "@nx/react-native:run-ios"
+    },
+    "android": {
+      "executor": "@nx/react-native:run-android"
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest"
+    }
+  }
+}
