@@ -392,6 +392,65 @@
 - Ran `npx tsc --noEmit` successfully.
 - Fixed responsive layout typing and themed surface lint warnings during validation.
 
+## 15. Implemented Mid-Level Testing
+- Created `src/mid-level/testing`.
+- Split the section into:
+- `jest`
+- `react-native-testing-library`
+- `maestro`
+- Added shared testing utilities under:
+- `src/mid-level/testing/shared`
+
+### Jest
+- Updated:
+- `jest.config.js`
+- Added:
+- `jest.setup.ts`
+- Implemented:
+- project-level test setup
+- native animation and gesture mocking
+- centralized Jest environment configuration
+
+### React Native Testing Library
+- Installed:
+- `@testing-library/react-native`
+- Added:
+- `src/mid-level/testing/react-native-testing-library/README.md`
+- `src/mid-level/testing/shared/test-utils.tsx`
+- `src/beginner/navigation-data/basic-forms-validation/01_SignUpForm.test.tsx`
+- `src/mid-level/ui-ux/theming/01_EnterpriseThemeConsole.test.tsx`
+- Removed:
+- `__tests__/App.test.tsx`
+- Implemented:
+- reusable render helper
+- behavior-focused form testing
+- provider-aware theme testing
+- user-visible interaction assertions instead of implementation-detail checks
+
+### Maestro
+- Updated roadmap documentation to include:
+- `Maestro`
+- Added:
+- `src/mid-level/testing/maestro/README.md`
+- `src/mid-level/testing/maestro/01_MaestroWorkspaceHarness.tsx`
+- `.maestro/README.md`
+- `.maestro/workspace-smoke.yaml`
+- `.maestro/workspace-alerts-toggle.yaml`
+- Updated:
+- `App.tsx`
+- `package.json`
+- Implemented:
+- stable in-app automation harness with explicit `testID` values
+- Maestro smoke flow
+- Maestro toggle flow
+- npm scripts for running Maestro flows
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Ran `npm test -- --runInBand` successfully.
+- Confirmed Maestro CLI is not installed on this machine, so the Maestro flows were prepared but not executed locally.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)

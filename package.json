@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "e2e:maestro:smoke": "maestro test .maestro/workspace-smoke.yaml",
+    "e2e:maestro:toggle": "maestro test .maestro/workspace-alerts-toggle.yaml",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
@@ -41,6 +43,7 @@
     "@react-native/eslint-config": "0.84.1",
     "@react-native/metro-config": "0.84.1",
     "@react-native/typescript-config": "0.84.1",
+    "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.2.0",
     "@types/react-test-renderer": "^19.1.0",

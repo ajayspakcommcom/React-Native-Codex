@@ -1,0 +1,16 @@
+appId: com.reactnativecodex
+---
+- launchApp
+- tapOn:
+    id: "e2e-email-input"
+- inputText: "alerts@reactnativecodex.dev"
+- tapOn:
+    id: "e2e-workspace-input"
+- inputText: "Alert Routing"
+- tapOn:
+    id: "e2e-alerts-switch"
+- tapOn:
+    id: "e2e-create-workspace-button"
+- assertVisible:
+    id: "e2e-success-banner"
+- assertVisible: "Alert Routing workspace created in Staging with notifications disabled."

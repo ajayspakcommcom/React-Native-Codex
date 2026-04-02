@@ -46,6 +46,7 @@
 ### Testing
 - Jest
 - React Native Testing Library
+- Maestro
 
 ### Builds
 - Android APK/AAB
