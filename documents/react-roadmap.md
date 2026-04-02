@@ -70,7 +70,9 @@
 ### Native Integration
 - Native Modules (Java/Kotlin, Obj-C/Swift)
 - TurboModules & Fabric (new architecture)
-- Background tasks, push notifications
+- Background tasks
+- Foreground task handling
+- Push notifications
 
 ### Networking & Offline
 - Advanced caching
