@@ -26,6 +26,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>We use the camera so you can capture delivery proof and workspace reference images.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to protect sensitive credentials stored in the secure vault.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -34,7 +38,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>We use your location to show nearby delivery tasks and location-aware workspace features.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We use your photo library so you can attach existing media to workspace tasks.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

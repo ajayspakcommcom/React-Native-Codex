@@ -1,0 +1,71 @@
+name: release-ios
+
+on:
+  workflow_dispatch:
+    inputs:
+      export_method:
+        description: IPA export method
+        required: true
+        type: choice
+        default: app-store
+        options:
+          - app-store
+          - ad-hoc
+      upload_artifact:
+        description: Upload the generated IPA to the workflow run
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: release-ios-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build-ios-release
+    runs-on: macos-14
+    timeout-minutes: 60
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+      APP_STORE_CONNECT_APPLE_ID: ${{ secrets.APP_STORE_CONNECT_APPLE_ID }}
+      APP_STORE_CONNECT_TEAM_ID: ${{ secrets.APP_STORE_CONNECT_TEAM_ID }}
+      APPLE_DEVELOPER_TEAM_ID: ${{ secrets.APPLE_DEVELOPER_TEAM_ID }}
+      IOS_BUNDLE_IDENTIFIER: ${{ secrets.IOS_BUNDLE_IDENTIFIER }}
+      MATCH_GIT_URL: ${{ secrets.MATCH_GIT_URL }}
+      MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.11.0
+          cache: npm
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Install CocoaPods
+        run: bundle exec pod install --project-directory=ios
+
+      - name: Build IPA with Fastlane
+        run: bundle exec fastlane ios build_ipa export_method:${{ github.event.inputs.export_method }}
+
+      - name: Upload IPA artifact
+        if: ${{ github.event.inputs.upload_artifact == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: artifacts/ios/*.ipa
+          if-no-files-found: error
+

@@ -1,0 +1,25 @@
+{
+  "name": "react-native-enterprise-workspace",
+  "private": true,
+  "packageManager": "npm@10.8.2",
+  "scripts": {
+    "graph": "nx graph",
+    "affected:lint": "nx affected -t lint",
+    "affected:test": "nx affected -t test",
+    "affected:build": "nx affected -t build",
+    "mobile:start": "nx start mobile",
+    "mobile:ios": "nx run mobile:ios",
+    "mobile:android": "nx run mobile:android"
+  },
+  "devDependencies": {
+    "@nx/eslint": "20.0.7",
+    "@nx/js": "20.0.7",
+    "@nx/react": "20.0.7",
+    "@nx/react-native": "20.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "nx": "20.0.7",
+    "typescript": "^5.8.2"
+  }
+}

@@ -1,0 +1,19 @@
+appId: com.reactnativecodex
+---
+- launchApp
+- assertVisible:
+    id: "e2e-email-input"
+- tapOn:
+    id: "e2e-email-input"
+- inputText: "qa@reactnativecodex.dev"
+- tapOn:
+    id: "e2e-workspace-input"
+- inputText: "Operations Hub"
+- tapOn:
+    id: "e2e-environment-production"
+- tapOn:
+    id: "e2e-create-workspace-button"
+- assertVisible: "Workspace created"
+- assertVisible:
+    id: "e2e-success-banner"
+- assertVisible: "Operations Hub workspace created in Production with notifications enabled."

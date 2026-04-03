@@ -25,7 +25,7 @@
 ### State & Architecture
 - Hooks in depth
 - Context API
-- Redux Toolkit / Zustand
+- Redux Toolkit / RTK Query
 - Clean component structure
 
 ### Native Features
@@ -46,6 +46,7 @@
 ### Testing
 - Jest
 - React Native Testing Library
+- Maestro
 
 ### Builds
 - Android APK/AAB
@@ -69,7 +70,9 @@
 ### Native Integration
 - Native Modules (Java/Kotlin, Obj-C/Swift)
 - TurboModules & Fabric (new architecture)
-- Background tasks, push notifications
+- Background tasks
+- Foreground task handling
+- Push notifications
 
 ### Networking & Offline
 - Advanced caching
@@ -84,7 +87,7 @@
 ### Security
 - Secure storage
 - Certificate pinning
-- App hardening basics
+- App hardening
 
 ## Expert (15+ months)
 

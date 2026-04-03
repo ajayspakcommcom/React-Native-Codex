@@ -1,0 +1,94 @@
+name: release-android
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact:
+        description: Android artifact to build
+        required: true
+        type: choice
+        default: production_aab
+        options:
+          - staging_apk
+          - production_aab
+      upload_artifact:
+        description: Upload the generated artifact to the workflow run
+        required: true
+        type: boolean
+        default: true
+
+concurrency:
+  group: release-android-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build-android-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    env:
+      CI: "true"
+      ANDROID_RELEASE_STORE_FILE: ${{ secrets.ANDROID_RELEASE_STORE_FILE }}
+      ANDROID_RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_STORE_PASSWORD }}
+      ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+      ANDROID_RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.11.0
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Decode Android release keystore
+        if: ${{ env.ANDROID_RELEASE_STORE_FILE != '' }}
+        env:
+          ANDROID_RELEASE_KEYSTORE_BASE64: ${{ secrets.ANDROID_RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          mkdir -p android/app
+          echo "$ANDROID_RELEASE_KEYSTORE_BASE64" | base64 --decode > android/app/release.keystore
+
+      - name: Build staging APK
+        if: ${{ github.event.inputs.artifact == 'staging_apk' }}
+        run: bundle exec fastlane android staging_apk
+
+      - name: Build production AAB
+        if: ${{ github.event.inputs.artifact == 'production_aab' }}
+        run: bundle exec fastlane android production_aab
+
+      - name: Upload APK artifact
+        if: ${{ github.event.inputs.upload_artifact == 'true' && github.event.inputs.artifact == 'staging_apk' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-staging-apk
+          path: android/app/build/outputs/apk/staging/release/*.apk
+          if-no-files-found: error
+
+      - name: Upload AAB artifact
+        if: ${{ github.event.inputs.upload_artifact == 'true' && github.event.inputs.artifact == 'production_aab' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-production-aab
+          path: android/app/build/outputs/bundle/productionRelease/*.aab
+          if-no-files-found: error
+
