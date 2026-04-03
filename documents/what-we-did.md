@@ -762,6 +762,69 @@
 - Ran `npx tsc --noEmit` successfully.
 - Ran `./gradlew :app:compileDevelopmentDebugKotlin` successfully for Android native module verification.
 
+## 20. Implemented Senior Networking & Offline
+- Created `src/senior/networking-offline`.
+- Split the section into:
+- `advanced-caching`
+- `offline-first-apps`
+- `sync-strategies`
+- Added section tracking in:
+- `src/senior/networking-offline/README.md`
+- Added a section-level pending tracker:
+- `src/senior/networking-offline/PENDING.md`
+
+### Advanced caching
+- Created:
+- `src/senior/networking-offline/advanced-caching/README.md`
+- `src/senior/networking-offline/advanced-caching/cacheContracts.ts`
+- `src/senior/networking-offline/advanced-caching/cacheStorage.ts`
+- `src/senior/networking-offline/advanced-caching/cacheRepository.ts`
+- `src/senior/networking-offline/advanced-caching/01_AdvancedCacheControlCenter.tsx`
+- Implemented:
+- typed cache policy contracts
+- memory plus MMKV cache layering
+- explicit TTL and stale windows
+- `network-first`, `cache-first`, and `stale-while-revalidate`
+- repository-owned cache orchestration
+
+### Offline-first apps
+- Created:
+- `src/senior/networking-offline/offline-first-apps/README.md`
+- `src/senior/networking-offline/offline-first-apps/offlineContracts.ts`
+- `src/senior/networking-offline/offline-first-apps/offlineStore.ts`
+- `src/senior/networking-offline/offline-first-apps/syncCoordinator.ts`
+- `src/senior/networking-offline/offline-first-apps/offlineRepository.ts`
+- `src/senior/networking-offline/offline-first-apps/01_OfflineFirstOperationsBoard.tsx`
+- Implemented:
+- local-first reads and writes
+- persisted mutation queue
+- explicit sync orchestration
+- offline versus online mode handling
+- repository-owned offline logic
+
+### Sync strategies
+- Created:
+- `src/senior/networking-offline/sync-strategies/README.md`
+- `src/senior/networking-offline/sync-strategies/syncContracts.ts`
+- `src/senior/networking-offline/sync-strategies/syncCheckpointStore.ts`
+- `src/senior/networking-offline/sync-strategies/conflictResolver.ts`
+- `src/senior/networking-offline/sync-strategies/syncEngine.ts`
+- `src/senior/networking-offline/sync-strategies/01_SyncStrategyConsole.tsx`
+- Implemented:
+- explicit sync checkpoints
+- push and pull phase separation
+- conflict resolution policy
+- checkpoint advancement after a completed run
+- sync engine separated from the UI layer
+
+### Pending rollout tracking
+- Tracked remaining backend and rollout work in:
+- `src/senior/networking-offline/PENDING.md`
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
