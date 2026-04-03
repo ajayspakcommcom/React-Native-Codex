@@ -1,0 +1,88 @@
+default_platform(:android)
+
+def ci_environment?
+  ENV["CI"] == "true"
+end
+
+def ensure_env!(keys)
+  missing = keys.select { |key| ENV[key].to_s.strip.empty? }
+  return if missing.empty?
+
+  UI.user_error!("Missing required environment variables: #{missing.join(', ')}")
+end
+
+def android_signing_properties
+  {
+    "RELEASE_STORE_FILE" => ENV["ANDROID_RELEASE_STORE_FILE"],
+    "RELEASE_STORE_PASSWORD" => ENV["ANDROID_RELEASE_STORE_PASSWORD"],
+    "RELEASE_KEY_ALIAS" => ENV["ANDROID_RELEASE_KEY_ALIAS"],
+    "RELEASE_KEY_PASSWORD" => ENV["ANDROID_RELEASE_KEY_PASSWORD"]
+  }.compact
+end
+
+platform :android do
+  desc "Build a staging APK for QA distribution"
+  lane :staging_apk do
+    gradle(task: "clean", project_dir: "android")
+    gradle(
+      task: "assemble",
+      flavor: "Staging",
+      build_type: "Release",
+      project_dir: "android",
+      print_command: false,
+      properties: android_signing_properties
+    )
+  end
+
+  desc "Build a production AAB for Play Store delivery"
+  lane :production_aab do
+    ensure_env!(%w[
+      ANDROID_RELEASE_STORE_FILE
+      ANDROID_RELEASE_STORE_PASSWORD
+      ANDROID_RELEASE_KEY_ALIAS
+      ANDROID_RELEASE_KEY_PASSWORD
+    ]) if ci_environment?
+
+    gradle(task: "clean", project_dir: "android")
+    gradle(
+      task: "bundle",
+      flavor: "Production",
+      build_type: "Release",
+      project_dir: "android",
+      print_command: false,
+      properties: android_signing_properties
+    )
+  end
+end
+
+platform :ios do
+  desc "Build a signed IPA for TestFlight or enterprise distribution"
+  lane :build_ipa do |options|
+    export_method = options[:export_method] || "app-store"
+    scheme = options[:scheme] || "ReactNativeCodex"
+    configuration = options[:configuration] || "Release"
+
+    ensure_env!(%w[
+      APP_STORE_CONNECT_APPLE_ID
+      APPLE_DEVELOPER_TEAM_ID
+      IOS_BUNDLE_IDENTIFIER
+    ]) if ci_environment?
+
+    sync_code_signing(
+      type: export_method == "ad-hoc" ? "adhoc" : "appstore",
+      readonly: ci_environment?
+    )
+
+    build_app(
+      workspace: "ios/ReactNativeCodex.xcworkspace",
+      scheme: scheme,
+      configuration: configuration,
+      clean: true,
+      export_method: export_method,
+      output_directory: "artifacts/ios",
+      output_name: "ReactNativeCodex.ipa",
+      include_bitcode: false,
+      silent: false
+    )
+  end
+end
