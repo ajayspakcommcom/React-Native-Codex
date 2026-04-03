@@ -87,7 +87,7 @@
 ### Security
 - Secure storage
 - Certificate pinning
-- App hardening basics
+- App hardening
 
 ## Expert (15+ months)
 

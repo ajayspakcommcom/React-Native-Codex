@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>We use the camera so you can capture delivery proof and workspace reference images.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to protect sensitive credentials stored in the secure vault.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

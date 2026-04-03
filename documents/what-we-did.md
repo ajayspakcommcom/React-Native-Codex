@@ -901,6 +901,89 @@
 - Verified the new Fastlane Ruby files with `ruby -c`.
 - Verified GitHub Actions workflow YAML parsing successfully.
 
+## 22. Implemented Senior Security
+- Created `src/senior/security`.
+- Split the section into:
+- `secure-storage`
+- `certificate-pinning`
+- `app-hardening-basics`
+- Added section tracking in:
+- `src/senior/security/README.md`
+
+### Secure storage
+- Installed:
+- `react-native-keychain`
+- Updated:
+- `package.json`
+- `package-lock.json`
+- `ios/ReactNativeCodex/Info.plist`
+- Created:
+- `src/senior/security/secure-storage/README.md`
+- `src/senior/security/secure-storage/PENDING.md`
+- `src/senior/security/secure-storage/storageContracts.ts`
+- `src/senior/security/secure-storage/deviceSecurityProbe.ts`
+- `src/senior/security/secure-storage/secureVaultService.ts`
+- `src/senior/security/secure-storage/01_SecureVaultControlCenter.tsx`
+- Implemented:
+- platform-backed secure storage with Keychain and Keystore
+- device-capability probing for biometry, passcode support, and Android security level
+- separate secure handling for session, refresh-token, and biometric unlock material
+- service-layer separation between secure storage logic and UI
+- pending tracking for backend lifecycle and iOS native rollout
+
+### Certificate pinning
+- Installed:
+- `react-native-ssl-public-key-pinning`
+- Updated:
+- `package.json`
+- `package-lock.json`
+- Created:
+- `src/senior/security/certificate-pinning/README.md`
+- `src/senior/security/certificate-pinning/PENDING.md`
+- `src/senior/security/certificate-pinning/pinningContracts.ts`
+- `src/senior/security/certificate-pinning/pinningProfiles.ts`
+- `src/senior/security/certificate-pinning/certificatePinningService.ts`
+- `src/senior/security/certificate-pinning/01_CertificatePinningControlCenter.tsx`
+- Implemented:
+- maintained public-key pinning integration
+- typed domain pinning profiles
+- runtime enable and disable orchestration
+- pinning error listener handling
+- pending tracking for real certificate hashes, rotation, and iOS native rollout
+
+### App hardening basics
+- Updated:
+- `android/app/src/main/AndroidManifest.xml`
+- `documents/react-roadmap.md`
+- Created Android hardening resources:
+- `android/app/src/main/res/xml/network_security_config.xml`
+- `android/app/src/main/res/xml/backup_rules.xml`
+- `android/app/src/main/res/xml/data_extraction_rules.xml`
+- Created:
+- `src/senior/security/app-hardening-basics/README.md`
+- `src/senior/security/app-hardening-basics/PENDING.md`
+- `src/senior/security/app-hardening-basics/hardeningContracts.ts`
+- `src/senior/security/app-hardening-basics/hardeningPolicy.ts`
+- `src/senior/security/app-hardening-basics/01_AppHardeningCommandCenter.tsx`
+- Implemented:
+- explicit Android cleartext blocking
+- Android network security configuration
+- Android backup and device-transfer restriction rules
+- hardening control inventory for implemented versus pending controls
+- pending tracking for screenshot protection, compromised-device handling, attestation, and release validation
+
+### Pending rollout tracking
+- Tracked remaining rollout and validation work in:
+- `src/senior/security/secure-storage/PENDING.md`
+- `src/senior/security/certificate-pinning/PENDING.md`
+- `src/senior/security/app-hardening-basics/PENDING.md`
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Ran `./gradlew :app:compileDevelopmentDebugKotlin` successfully after the security integrations and hardening changes.
+- Attempted `bundle exec pod install --project-directory=ios`, but the local Ruby environment does not currently have the required CocoaPods gem; that gap is tracked in the secure-storage and certificate-pinning pending files.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
