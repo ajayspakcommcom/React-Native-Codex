@@ -1262,6 +1262,61 @@
 - Ran `npm run lint` successfully.
 - Ran `npx tsc --noEmit` successfully.
 
+## 27. Implemented Expert Leadership
+- Created `src/expert/leadership`.
+- Split the section into:
+- `tech-decisions-rfcs`
+- `mentoring-developers`
+- `code-reviews-at-scale`
+- `cross-platform-trade-offs`
+- Added section tracking in:
+- `src/expert/leadership/README.md`
+
+### Tech decisions and RFCs
+- Created:
+- `src/expert/leadership/tech-decisions-rfcs/README.md`
+- `src/expert/leadership/tech-decisions-rfcs/01_EnterpriseTechnicalDecisionFramework.md`
+- `src/expert/leadership/tech-decisions-rfcs/02_ReactNativePlatformRfcTemplate.md`
+- Implemented:
+- enterprise decision-making principles
+- RFC operating model
+- approval and review expectations
+- a reusable React Native platform RFC template
+
+### Mentoring developers
+- Created:
+- `src/expert/leadership/mentoring-developers/README.md`
+- `src/expert/leadership/mentoring-developers/01_EngineeringMentorshipOperatingModel.md`
+- Implemented:
+- mentoring operating model
+- level-based growth expectations
+- feedback cadence guidance
+- coaching, teaching, sponsorship, and feedback distinctions
+
+### Code reviews at scale
+- Created:
+- `src/expert/leadership/code-reviews-at-scale/README.md`
+- `src/expert/leadership/code-reviews-at-scale/01_EnterpriseCodeReviewFramework.md`
+- Implemented:
+- enterprise review priorities
+- review classes by risk
+- ownership and escalation expectations
+- scaled review model and anti-pattern guidance
+
+### Cross-platform trade-offs
+- Created:
+- `src/expert/leadership/cross-platform-trade-offs/README.md`
+- `src/expert/leadership/cross-platform-trade-offs/01_CrossPlatformDecisionMatrix.md`
+- Implemented:
+- React Native versus Flutter versus fully native decision guidance
+- enterprise decision drivers
+- platform selection matrix
+- leadership framing for platform strategy decisions
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
