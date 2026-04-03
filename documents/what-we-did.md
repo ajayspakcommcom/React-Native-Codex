@@ -1139,6 +1139,61 @@
 - Ran `npm run lint` successfully.
 - Ran `npx tsc --noEmit` successfully.
 
+## 25. Implemented Expert Advanced Native
+- Created `src/expert/advanced-native`.
+- Split the section into:
+- `custom-native-ui-components`
+- `performance-profiling`
+- Added section tracking in:
+- `src/expert/advanced-native/README.md`
+
+### Custom native UI components
+- Created:
+- `src/expert/advanced-native/custom-native-ui-components/README.md`
+- `src/expert/advanced-native/custom-native-ui-components/PENDING.md`
+- `src/expert/advanced-native/custom-native-ui-components/nativeStatusSurfaceContracts.ts`
+- `src/expert/advanced-native/custom-native-ui-components/NativeStatusSurface.tsx`
+- `src/expert/advanced-native/custom-native-ui-components/01_NativeStatusSurfaceConsole.tsx`
+- `android/app/src/main/java/com/reactnativecodex/advancednative/OperationsStatusSurfaceView.kt`
+- `android/app/src/main/java/com/reactnativecodex/advancednative/OperationsStatusSurfaceManager.kt`
+- `android/app/src/main/java/com/reactnativecodex/advancednative/OperationsStatusSurfacePackage.kt`
+- `ios/ReactNativeCodex/OperationsStatusSurfaceView.swift`
+- `ios/ReactNativeCodex/OperationsStatusSurfaceViewManager.swift`
+- `ios/ReactNativeCodex/OperationsStatusSurfaceViewManagerBridge.m`
+- Updated:
+- `android/app/src/main/java/com/reactnativecodex/MainApplication.kt`
+- `ios/ReactNativeCodex.xcodeproj/project.pbxproj`
+- Implemented:
+- typed JS contract and wrapper around the native status surface
+- Android native view implementation and package registration
+- iOS native view implementation files and Xcode project wiring
+- enterprise fallback behavior when the native view is not registered
+- pending tracking for iOS verification, accessibility review, Fabric migration, and visual coverage
+
+### Performance profiling
+- Created:
+- `src/expert/advanced-native/performance-profiling/README.md`
+- `src/expert/advanced-native/performance-profiling/PENDING.md`
+- `src/expert/advanced-native/performance-profiling/profilingContracts.ts`
+- `src/expert/advanced-native/performance-profiling/profilingWorkflowModel.ts`
+- `src/expert/advanced-native/performance-profiling/01_NativeProfilingConsole.tsx`
+- `src/expert/advanced-native/performance-profiling/02_EnterpriseNativeProfilingWorkflow.md`
+- Implemented:
+- enterprise profiling tool contracts for Flipper, Xcode Instruments, and Android Profiler
+- problem-to-profiler routing model
+- release-build and device-first profiling workflow guidance
+- pending tracking for local profiler setup, real capture sessions, symbols, and regression budgets
+
+### Pending rollout tracking
+- Tracked remaining advanced-native follow-up work in:
+- `src/expert/advanced-native/custom-native-ui-components/PENDING.md`
+- `src/expert/advanced-native/performance-profiling/PENDING.md`
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+- Ran `./gradlew :app:compileDevelopmentDebugKotlin` successfully after the native component integration.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
