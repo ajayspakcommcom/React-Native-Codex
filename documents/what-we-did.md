@@ -830,6 +830,7 @@
 - Split the section into:
 - `fastlane`
 - `github-actions`
+- `codepush-ota-updates`
 - Added section tracking in:
 - `src/senior/ci-cd/README.md`
 
@@ -871,10 +872,28 @@
 - secret-driven release configuration
 - Fastlane-integrated CI/CD orchestration
 
+### CodePush / OTA updates
+- Created:
+- `src/senior/ci-cd/codepush-ota-updates/README.md`
+- `src/senior/ci-cd/codepush-ota-updates/PENDING.md`
+- `src/senior/ci-cd/codepush-ota-updates/otaContracts.ts`
+- `src/senior/ci-cd/codepush-ota-updates/otaManifestStore.ts`
+- `src/senior/ci-cd/codepush-ota-updates/otaChannelResolver.ts`
+- `src/senior/ci-cd/codepush-ota-updates/otaUpdateCoordinator.ts`
+- `src/senior/ci-cd/codepush-ota-updates/01_EnterpriseOtaControlCenter.tsx`
+- Implemented:
+- provider-agnostic OTA architecture
+- rollout channel policy for internal, staging, and production
+- persisted manifest and status tracking with MMKV
+- check, download, apply, and dismiss orchestration
+- enterprise OTA control-center example
+- modern OTA direction aligned to `expo-updates` / EAS Update instead of the retired App Center CodePush path
+
 ### Pending rollout tracking
 - Tracked remaining secret, signing, repository-settings, and live-run rollout work in:
 - `src/senior/ci-cd/fastlane/PENDING.md`
 - `src/senior/ci-cd/github-actions/PENDING.md`
+- `src/senior/ci-cd/codepush-ota-updates/PENDING.md`
 
 ### Validation
 - Ran `npm run lint` successfully.

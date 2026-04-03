@@ -6,6 +6,7 @@ This folder contains the `CI/CD` part of the Senior roadmap.
 - Created the `ci-cd` folder inside `src/senior`.
 - Started this section with `fastlane`.
 - Added the second topic: `github-actions`.
+- Added the third topic: `codepush-ota-updates`.
 - Added this section summary file as the running log for this folder.
 
 ## Current Topics
@@ -16,6 +17,7 @@ This folder contains the `CI/CD` part of the Senior roadmap.
 ## Current Structure
 - `fastlane`
 - `github-actions`
+- `codepush-ota-updates`
 
 ## Notes
 - Senior CI/CD work in this section should reflect release engineering patterns used by real teams, not one-off local build commands.
