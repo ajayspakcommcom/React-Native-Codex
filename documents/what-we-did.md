@@ -984,6 +984,84 @@
 - Ran `./gradlew :app:compileDevelopmentDebugKotlin` successfully after the security integrations and hardening changes.
 - Attempted `bundle exec pod install --project-directory=ios`, but the local Ruby environment does not currently have the required CocoaPods gem; that gap is tracked in the secure-storage and certificate-pinning pending files.
 
+## 23. Implemented Expert Internals
+- Created `src/expert/internals`.
+- Split the section into:
+- `react-native-bridge-internals`
+- `jsi`
+- `fabric-renderer`
+- `hermes-engine-tuning`
+- Added section tracking in:
+- `src/expert/internals/README.md`
+
+### React Native bridge internals
+- Created:
+- `src/expert/internals/react-native-bridge-internals/README.md`
+- `src/expert/internals/react-native-bridge-internals/PENDING.md`
+- `src/expert/internals/react-native-bridge-internals/bridgeContracts.ts`
+- `src/expert/internals/react-native-bridge-internals/bridgeRuntimeProbe.ts`
+- `src/expert/internals/react-native-bridge-internals/bridgePipelineModel.ts`
+- `src/expert/internals/react-native-bridge-internals/01_BridgeInternalsConsole.tsx`
+- Implemented:
+- legacy bridge queue and serialization model
+- runtime detection of Hermes, TurboModule proxy, and bridgeless posture
+- side-by-side old bridge versus new architecture pipeline modeling
+- migration and interop context for modern React Native apps
+- pending tracking for deeper React Native core instrumentation
+
+### JSI
+- Created:
+- `src/expert/internals/jsi/README.md`
+- `src/expert/internals/jsi/PENDING.md`
+- `src/expert/internals/jsi/jsiContracts.ts`
+- `src/expert/internals/jsi/jsiRuntimeProbe.ts`
+- `src/expert/internals/jsi/jsiArchitectureModel.ts`
+- `src/expert/internals/jsi/01_JsiInternalsConsole.tsx`
+- Implemented:
+- runtime-level JSI capability detection
+- expert modeling for host functions, host objects, TurboModule bindings, and runtime globals
+- separation between runtime concepts and UI
+- pending tracking for native C++ JSI installers and host objects
+
+### Fabric renderer
+- Created:
+- `src/expert/internals/fabric-renderer/README.md`
+- `src/expert/internals/fabric-renderer/PENDING.md`
+- `src/expert/internals/fabric-renderer/fabricContracts.ts`
+- `src/expert/internals/fabric-renderer/fabricRuntimeProbe.ts`
+- `src/expert/internals/fabric-renderer/fabricArchitectureModel.ts`
+- `src/expert/internals/fabric-renderer/01_FabricRendererConsole.tsx`
+- Implemented:
+- runtime-aware Fabric posture modeling
+- modern rendering pipeline stages for reconciliation, shadow-tree work, layout, commit, mounting, and events
+- clear distinction from the old bridge-driven UIManager model
+- pending tracking for custom native Fabric components and renderer telemetry
+
+### Hermes engine tuning
+- Created:
+- `src/expert/internals/hermes-engine-tuning/README.md`
+- `src/expert/internals/hermes-engine-tuning/PENDING.md`
+- `src/expert/internals/hermes-engine-tuning/hermesContracts.ts`
+- `src/expert/internals/hermes-engine-tuning/hermesRuntimeProbe.ts`
+- `src/expert/internals/hermes-engine-tuning/hermesTuningModel.ts`
+- `src/expert/internals/hermes-engine-tuning/01_HermesTuningConsole.tsx`
+- Implemented:
+- runtime-aware Hermes verification
+- release-focused tuning areas for bundle shape, source maps, memory, profiling, and binary size
+- separation between engine posture, tuning guidance, and UI
+- pending tracking for release-artifact comparison and device profiling
+
+### Pending rollout tracking
+- Tracked remaining internals follow-up work in:
+- `src/expert/internals/react-native-bridge-internals/PENDING.md`
+- `src/expert/internals/jsi/PENDING.md`
+- `src/expert/internals/fabric-renderer/PENDING.md`
+- `src/expert/internals/hermes-engine-tuning/PENDING.md`
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
