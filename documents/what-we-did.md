@@ -1194,6 +1194,74 @@
 - Ran `npx tsc --noEmit` successfully.
 - Ran `./gradlew :app:compileDevelopmentDebugKotlin` successfully after the native component integration.
 
+## 26. Implemented Expert Release & Ops
+- Created `src/expert/release-ops`.
+- Started the section with:
+- `crash-analytics`
+- `feature-flags`
+- `ab-testing`
+- Added section tracking in:
+- `src/expert/release-ops/README.md`
+
+### Crash analytics
+- Created:
+- `src/expert/release-ops/crash-analytics/README.md`
+- `src/expert/release-ops/crash-analytics/PENDING.md`
+- `src/expert/release-ops/crash-analytics/crashAnalyticsContracts.ts`
+- `src/expert/release-ops/crash-analytics/crashAnalyticsPolicy.ts`
+- `src/expert/release-ops/crash-analytics/crashAnalyticsCoordinator.ts`
+- `src/expert/release-ops/crash-analytics/01_CrashAnalyticsControlCenter.tsx`
+- `src/expert/release-ops/crash-analytics/02_EnterpriseCrashAnalyticsWorkflow.md`
+- Implemented:
+- provider-agnostic crash analytics contracts
+- enterprise operating profiles for Sentry and Firebase Crashlytics
+- central coordinator modeling for fatal, non-fatal, breadcrumb, and release metadata policy
+- rollout workflow guidance
+- pending tracking for provider installation, credentials, symbol uploads, and live crash validation
+
+### Feature flags
+- Created:
+- `src/expert/release-ops/feature-flags/README.md`
+- `src/expert/release-ops/feature-flags/PENDING.md`
+- `src/expert/release-ops/feature-flags/featureFlagContracts.ts`
+- `src/expert/release-ops/feature-flags/featureFlagPolicy.ts`
+- `src/expert/release-ops/feature-flags/featureFlagCoordinator.ts`
+- `src/expert/release-ops/feature-flags/01_FeatureFlagControlCenter.tsx`
+- `src/expert/release-ops/feature-flags/02_EnterpriseFeatureFlagWorkflow.md`
+- Implemented:
+- provider-neutral feature-flag contracts
+- rollout modes for disabled, internal-only, percentage, allowlist, and global states
+- deterministic evaluation through a coordinator
+- ownership, expiration, environment, and cleanup posture
+- pending tracking for real provider rollout and governance enforcement
+
+### A/B testing
+- Created:
+- `src/expert/release-ops/ab-testing/README.md`
+- `src/expert/release-ops/ab-testing/PENDING.md`
+- `src/expert/release-ops/ab-testing/experimentContracts.ts`
+- `src/expert/release-ops/ab-testing/experimentPolicy.ts`
+- `src/expert/release-ops/ab-testing/experimentCoordinator.ts`
+- `src/expert/release-ops/ab-testing/01_ExperimentationControlCenter.tsx`
+- `src/expert/release-ops/ab-testing/02_EnterpriseExperimentationWorkflow.md`
+- Implemented:
+- typed experiment contracts
+- deterministic variant assignment
+- primary and guardrail metric modeling
+- coordinator-based experiment evaluation
+- ownership, expiration, and cleanup posture
+- pending tracking for real analytics and experimentation-provider rollout
+
+### Pending rollout tracking
+- Tracked remaining release-and-ops follow-up work in:
+- `src/expert/release-ops/crash-analytics/PENDING.md`
+- `src/expert/release-ops/feature-flags/PENDING.md`
+- `src/expert/release-ops/ab-testing/PENDING.md`
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
