@@ -1317,6 +1317,52 @@
 - Ran `npm run lint` successfully.
 - Ran `npx tsc --noEmit` successfully.
 
+## 28. Implemented Must-Have Side Skills
+- Created `src/side-skills`.
+- Included:
+- `deep-typescript`
+- `mobile-ux-principles`
+- `app-store-play-store-policies`
+- Skipped as requested:
+- `REST + GraphQL`
+- `Backend basics (Node.js)`
+- Added section tracking in:
+- `src/side-skills/README.md`
+
+### Deep TypeScript
+- Created:
+- `src/side-skills/deep-typescript/README.md`
+- `src/side-skills/deep-typescript/01_EnterpriseTypeScriptOperatingModel.md`
+- Implemented:
+- enterprise type architecture principles
+- domain and API typing guidance
+- public contract rules
+- anti-pattern guidance for large TypeScript codebases
+
+### Mobile UX principles
+- Created:
+- `src/side-skills/mobile-ux-principles/README.md`
+- `src/side-skills/mobile-ux-principles/01_EnterpriseMobileUxPrinciples.md`
+- Implemented:
+- core mobile UX principles
+- feedback and trust-signal guidance
+- accessibility posture expectations
+- anti-pattern guidance for real mobile product flows
+
+### App Store and Play Store policies
+- Created:
+- `src/side-skills/app-store-play-store-policies/README.md`
+- `src/side-skills/app-store-play-store-policies/01_StorePolicyOperatingModel.md`
+- Implemented:
+- enterprise store-policy operating model
+- high-risk policy areas
+- release and review governance guidance
+- policy-aware submission workflow expectations
+
+### Validation
+- Ran `npm run lint` successfully.
+- Ran `npx tsc --noEmit` successfully.
+
 ## Files created so far
 - [documents/react-roadmap.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/react-roadmap.md)
 - [documents/what-we-did.md](/Users/spakcomm-ajay/Documents/React-Native-Codex/documents/what-we-did.md)
